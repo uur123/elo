@@ -4,7 +4,7 @@ import pandas as pd
 import altair as alt
 
 st.title("ELO ranking system")
-st.write('Elo ratings are comparative only to rate the items the given pool. After the comparative selection, the Elo rating calculates a score for every items')
+st.write('Elo ratings are comparative only to rate the items the given pool. After the comparative selection, the Elo rating formula calculates the score for every given items')
 items = st.text_input('Introduce the items to compare in the box blow. Seperate items with a comma please.(e.g. item1, item2. item3, item4) ')
 
 if st.button:
@@ -39,7 +39,7 @@ if st.button:
         scores[loser] += k * (0 - expected_score_loser)
         #st.success(f"{winner} score: {scores[winner]}, {loser} score: {scores[loser]}")
 
-    if st.button('Show the results'):
+    if st.button('Start ranking'):
         pd.set_option('display.precision', 2)
         ranking = pd.DataFrame(list(scores.items()), columns = ['items', 'scores'])
         ranking.scores = ranking.scores.astype(int)
