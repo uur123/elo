@@ -4,7 +4,8 @@ import pandas as pd
 import altair as alt
 
 st.title("ELO ranking system")
-items = st.text_input('Please add the items to rank with , seperation. (e.g. item1, item2. item3, item4) ')
+st.write('Elo ratings are comparative only to rate the items the given pool. After the comparative selection, the Elo rating calculates a score for every items')
+items = st.text_input('Introduce the items to compare in the box blow. Seperate items with a comma please.(e.g. item1, item2. item3, item4) ')
 
 if st.button:
     #items.append(item)
@@ -21,8 +22,9 @@ if st.button:
     for item1, item2 in comparison_pairs:
         i+=1
         # Ask the user to choose the preferred item
-        st.write(f"Which item do you prefer: {item1} or {item2}?")
-        choice = st.text_input(f'{i}: Enter your choice')
+        #st.write(f"Which item do you prefer: {item1} or {item2}?")
+        items = item1, item2
+        choice = st.radio(label='Which item do you prefer?',options=items)
 
         if choice == item1:
             winner, loser = item1, item2
@@ -41,8 +43,11 @@ if st.button:
         pd.set_option('display.precision', 2)
         ranking = pd.DataFrame(list(scores.items()), columns = ['items', 'scores'])
         ranking.scores = ranking.scores.astype(int)
-        #st.write(ranking)
-        st.write(ranking.sort_values(by='scores', ascending=False))
+        
+        
+        col1,col2 = st.columns(2)
+        
+
         chart = (
             alt.Chart(ranking, title='Comparison results')
             .mark_bar()
@@ -52,5 +57,8 @@ if st.button:
                 color=alt.Color('variable', type='nominal')
             )
         )
-        st.altair_chart(chart, use_container_width=True)
+        col1.altair_chart(chart, use_container_width=True)
+
+        #st.write(ranking)
+        col2.write(ranking.sort_values(by='scores', ascending=False))
              
