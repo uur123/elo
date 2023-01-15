@@ -4,8 +4,8 @@ import pandas as pd
 import altair as alt
 
 st.title("ELO ranking system")
-st.write('Elo ratings are comparative only to rate the items the given pool. After the comparative selection, the Elo rating formula calculates the score for every given items')
-items = st.text_input('Introduce the items to compare in the box blow. Seperate items with a comma please.(e.g. item1, item2. item3, item4) ')
+st.write('Elo ratings are comparative only to rate the items in a given pool. After the comparative selection, the Elo rating formula calculates the score for every given items')
+items = st.text_input('Introduce the items to the box below. Seperate items with a comma please.(e.g. item1, item2. item3, item4)')
 
 if st.button:
     #items.append(item)
